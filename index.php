@@ -1,3 +1,6 @@
+<?php require_once 'conf/db.php' ?>
+<?php require_once 'login/log.php' ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +22,9 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
+
+    
+
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>GPI</b></a>
@@ -28,9 +34,17 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Authentification</p>
 
-      <form action="index3.html" method="post">
+      <?php if($erreur): ?>
+
+        <div class="alert alert-danger text-center">
+            <?= $erreur; ?>
+        </div>
+
+      <?php endif ?>
+
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" name="emailInfo" id="emailInfo" class="form-control" placeholder="Email" required> 
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -38,24 +52,25 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="mdpInfo" id="mdpInfo" class="form-control" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
-        
-      </form>
 
-      <div class="social-auth-links text-center mb-3">
-        <a href="home.php" class="btn btn-block btn-primary">
-          Se connecter
-        </a>        
+
+        <div class="social-auth-links text-center mb-3"> 
+        <button type="submit" class="btn btn-block btn-primary" name="login">Se connecter</button>       
         <a href="register.php" class="btn btn-block btn-danger">
             Inscrire un nouvel Agent
         </a>
       </div>
+        
+      </form>
+
+      
       <!-- /.social-auth-links -->
 
     </div>

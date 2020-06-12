@@ -1,3 +1,31 @@
+<?php require_once 'conf/db.php' ?>
+
+<?php
+if(!empty($_POST["add_record"])){
+
+//$service = $_POST['agentService'];
+
+  //$ab = "SELECT idService from service, agent WHERE libService = $service "; 
+
+    $sql = "INSERT INTO `agent` ('nomAgent', 'prenAgent', 'emailAgent', 'mdpAgent', 'telAgent') 
+            VALUES (:nomAgent, :prenAgent, :emailAgent, :mdpAgent, :telAgent)";
+    $req = $db->prepare($sql);
+    
+    $result = $req->execute(array(
+        ':nomAgent' => $_POST['nomAgent'],
+        ':prenAgent' => $_POST['prenAgent'],
+        ':emailAgent' => $_POST['emailAgent'],
+        ':mdpAgent' => $_POST['mdpAgent'],
+        ':telAgent' => $_POST['telAgent'],
+        //':dateMisJrAgent' => date("Y-m-d H:i:s"),
+    ));
+
+    if(!empty($result)){
+      header('location: admin/informaticien.php');}
+  
+  }   
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +56,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Enregistrer un nouvel Agent  </p>
 
-      <form action="index.php" method="post">
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nom">
+          <input type="text" class="form-control" placeholder="Nom" name="nomAgent" id="nomAgent" required/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -38,7 +66,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Prénoms">
+          <input type="text" class="form-control" placeholder="Prénoms" name="prenAgent" id="prenAgent" required/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -46,7 +74,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Téléphone">
+            <input type="text" class="form-control" placeholder="Téléphone" name="telAgent" id="telAgent" required/>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-phone"></span>
@@ -54,7 +82,7 @@
             </div>
           </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="emailAgent" id="emailAgent" required/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -62,7 +90,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Mot de passe">
+          <input type="password" class="form-control" placeholder="Mot de passe" name="mdpAgent" id="mdpAgent" required/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -70,7 +98,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Confirmer Mot de passe">
+          <input type="password" class="form-control" placeholder="Confirmer Mot de passe" name="mdpAgenc" id="mdpAgentc" required/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -79,25 +107,33 @@
         </div>
         <div class="input-group mb-3">
           <div class="input-group-append">
-              <select class="form-control custom-select">
+              <select name= "agentService" class="form-control custom-select">
                 <option selected disabled>Service</option>
-                <option>Administratif</option>
-                <option>Technique</option>
-                <option>Financier</option>
+                <?php 
+                  
+                  $connect = mysqli_connect ("localhost", "root", "","gestionParcinfo");
+                  $query = "SELECT * FROM service where libService != 'INFORMATIQUE'";
+                              
+                  $result = mysqli_query($connect, $query);?>
+                  <?php while($row = mysqli_fetch_array($result)):; ?>
+
+                  
+                  <option><?php echo $row[1]; ?></option>
+                <?php endwhile; ?> 
               </select>
           </div>
         </div>
-        
-      </form>
 
-      <div class="social-auth-links text-center mb-3">
-        <a href="home.php" class="btn btn-block btn-primary">
-          Enregistrer
-        </a>        
+        <div class="social-auth-links text-center mb-3">
+        <input name="add_record" type="submit" class="btn btn-block btn-primary" value="Enregistrer">        
         <a href="index.php" class="btn btn-block btn-danger">
             Se connecter
         </a>
       </div>
+        
+      </form>
+
+      
       <!-- /.social-auth-links -->
 
     </div>

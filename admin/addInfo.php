@@ -1,6 +1,6 @@
 <?php session_start(); // Starting Session ?>
 <?php require_once '../conf/db.php' ?>
-<?php include_once 'addAgentReq.php' ?>
+<?php include_once 'addInfoReq.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<?php include_once 'sidebarMenuAgent.php' ?>
+<?php include_once 'sidebarMenuInfo.php' ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -31,7 +31,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Ajouter un Agent</h1>
+            <h1>Ajouter un Informaticien</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -55,7 +55,7 @@
               <div class="card-header">
                 <div class="row">
                 <button style="font-size:19px">
-                  <a href="agent.php">Retour <i class="fas fa-plus-circle"></i> </a>
+                  <a href="informaticien.php">Retour <i class="fas fa-plus-circle"></i> </a>
                 </button>
                 <?php if(!empty($errors)): ?>
                     <ul> 
@@ -77,54 +77,45 @@
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-3 col-form-label">Nom</label>
                         <div class="col-sm-9">
-                          <input type="text" name="nomAgent" class="form-control" id="inputName" placeholder="Nom" required/>
+                          <input type="text" name="nomInfo" class="form-control" id="inputName" placeholder="Nom" required/>
                         </div>                        
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Prénoms</label>
                         <div class="col-sm-9">
-                          <input type="text" name="prenAgent" class="form-control" id="inputName2" placeholder="Prénoms" required/>
+                          <input type="text" name="prenInfo" class="form-control" id="inputName2" placeholder="Prénoms" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2"  class="col-sm-3 col-form-label">Téléphone</label>
                         <div class="col-sm-9">
-                          <input type="text" name="telAgent" class="form-control" id="inputName2" placeholder="Téléphone" required/>
+                          <input type="text" name="telInfo" class="form-control" id="inputName2" placeholder="Téléphone" required/>
                         </div>
                       </div>                      
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                          <input type="email" name="emailAgent" class="form-control" id="inputEmail" placeholder="Email" required/>
+                          <input type="email" name="emailInfo" class="form-control" id="inputEmail" placeholder="Email" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2"  class="col-sm-3 col-form-label">Mot de Passe</label>
                         <div class="col-sm-9">
-                          <input type="password" name="mdpAgent" class="form-control" id="inputName2" placeholder="Mot de Passe" required/>
+                          <input type="password" name="mdpInfo" class="form-control" id="inputName2" placeholder="Mot de Passe" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Confirmer Mot de Passe</label>
                         <div class="col-sm-9">
-                          <input type="password" name="mdpcAgent"  class="form-control" id="inputName2" placeholder="Mot de Passe" required/>
+                          <input type="password" name="mdpcInfo"  class="form-control" id="inputName2" placeholder="Mot de Passe" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Service</label>
                         <div class="col-sm-9">
-                          <select name="agentService" class="form-control custom-select">
-                            <?php 
-                              
-                              $connect = mysqli_connect ("localhost", "root", "","gestionParcinfo");
-                              $query = "SELECT * FROM service where libService != 'INFORMATIQUE'";
-                                          
-                              $result = mysqli_query($connect, $query);?>
-                              <?php while($row = mysqli_fetch_array($result)):; ?>
-
-                              
-                              <option><?php echo $row[1]; ?></option>
-                            <?php endwhile; ?> 
+                          <select name= "roleInfo" class="form-control custom-select">
+                            <option>Administrateur</option>
+                            <option>Editeur</option>                           
                           </select>
                         </div>
                       </div>

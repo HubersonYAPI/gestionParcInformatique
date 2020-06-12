@@ -1,3 +1,5 @@
+<?php session_start(); // Starting Session ?>
+<?php require_once '../conf/db.php' ?>
 <!DOCTYPE html>
 <html>
 <head>

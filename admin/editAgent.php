@@ -1,3 +1,7 @@
+<?php session_start(); // Starting Session ?>
+<?php require_once '../conf/db.php' ?>
+<?php include_once 'editAgentReq.php' ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +31,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Modifer les informations de l'Agent</h1>
+            <h1>Ajouter un Agent</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -47,72 +51,83 @@
                     
           <div class="col-md-9">
             <div class="card">
+
               <div class="card-header">
+                <div class="row">
                 <button style="font-size:19px">
                   <a href="agent.php">Retour <i class="fas fa-plus-circle"></i> </a>
                 </button>
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">                    
-                  </div>
+                <?php if(!empty($errors)): ?>
+                    <ul> 
+                        <?php foreach ($errors as $error): ?>
+                            <li style="color:red; font-size:19px"><?php echo $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                   <?php endif; ?> 
                 </div>
               </div>
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="active tab-pane">                   
-
+                  <div class="active tab-pane">
                   <div class="tab-pane">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="" method="POST">
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-3 col-form-label">Nom</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputName" placeholder="Nom">
+                          <input type="text" name="nomAgent" class="form-control" id="inputName" value="<?= $result[0]['nomAgent']  ?>" placeholder="Nom" required/>
                         </div>                        
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Prénoms</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Prénoms">
+                          <input type="text" name="prenAgent" class="form-control" id="inputName2" value="<?= $result[0]['prenAgent']  ?>" placeholder="Prénoms" required/>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-3 col-form-label">Téléphone</label>
+                        <label for="inputName2"  class="col-sm-3 col-form-label">Téléphone</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Téléphone">
+                          <input type="text" name="telAgent" class="form-control" id="inputName2" value="<?= $result[0]['telAgent']  ?>" placeholder="Téléphone" required/>
                         </div>
                       </div>                      
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input type="email" name="emailAgent" class="form-control" id="inputEmail" value="<?= $result[0]['emailAgent']  ?>" placeholder="Email" required/>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-3 col-form-label">Mot de Passe</label>
+                        <label for="inputName2"  class="col-sm-3 col-form-label">Mot de Passe</label>
                         <div class="col-sm-9">
-                          <input type="password" class="form-control" id="inputName2" placeholder="Mot de Passe">
+                          <input type="password" name="mdpAgent" class="form-control" id="inputName2"  placeholder="Mot de Passe" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Confirmer Mot de Passe</label>
                         <div class="col-sm-9">
-                          <input type="password" class="form-control" id="inputName2" placeholder="Mot de Passe">
+                          <input type="password" name="mdpcAgent"  class="form-control" id="inputName2" placeholder="Mot de Passe" required/>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Service</label>
                         <div class="col-sm-9">
-                          <select class="form-control">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
+                          <select name= "agentService" class="form-control custom-select">
+                            <?php 
+                              
+                              $connect = mysqli_connect ("localhost", "root", "","gestionParcinfo");
+                              $query = "SELECT * FROM service where libService != 'INFORMATIQUE'";
+                                          
+                              $result = mysqli_query($connect, $query);?>
+                              <?php while($row = mysqli_fetch_array($result)):; ?>
+
+                              
+                              <option><?php echo $row[1]; ?></option>
+                            <?php endwhile; ?> 
                           </select>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-9">
-                          <button type="submit" class="btn btn-primary">Enregistrer</button>
+                          <input name="save_record" type="submit" value="Mise à jour" class="btn btn-block btn-primary">        
                         </div>
                       </div>
                     </form>
