@@ -30,6 +30,7 @@ $req2 = $req->fetchAll();
 
 <?php include_once 'sidebarMenuInfo.php' ?>
 
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -37,7 +38,7 @@ $req2 = $req->fetchAll();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestion des Informaticiens</h1>
+            <h1>Liste des Informaticiens</h1>
           <!--  <h5><?= date("Y/m/d H:i:s") ?></h5> -->
           </div>
           <div class="col-sm-6">

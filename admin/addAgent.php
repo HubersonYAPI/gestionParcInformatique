@@ -113,7 +113,7 @@
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-3 col-form-label">Service</label>
                         <div class="col-sm-9">
-                          <select name="agentService" class="form-control custom-select">
+                          <select name= "agentService" class="form-control custom-select">
                             <?php 
                               
                               $connect = mysqli_connect ("localhost", "root", "","gestionParcinfo");

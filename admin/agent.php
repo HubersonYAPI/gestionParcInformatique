@@ -69,7 +69,7 @@ $req2 = $req->fetchAll();
                   <th>Nom & Prénoms</th>
                   <th>Téléphone</th>                  
                   <th>Email</th>
-                  <th>Mis à Jour</th>
+                  <th>Servie</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -83,7 +83,7 @@ $req2 = $req->fetchAll();
                     <td><?= $row['nomAgent'] . " ".$row['prenAgent']. "<br>"; ?></td>
                     <td><?= $row['telAgent'] . "<br>"; ?></td>
                     <td><?= $row['emailAgent'] . "<br>"; ?></td>
-                    <td><?= $row['dateMisJrAgent'] . "<br>"; ?></td>
+                    <td><?= $row['idService'] . "<br>"; ?></td>
                     <td class="project-actions text-left">
                       <a class="btn btn-primary btn-sm" href="viewAgent.php">
                           <i class="fas fa-eye"></i>
@@ -109,7 +109,7 @@ $req2 = $req->fetchAll();
                   <th>Nom & Prénoms</th>
                   <th>Téléphone</th>                  
                   <th>Email</th>
-                  <th>Mis à Jour</th>
+                  <th>Service</th>
                   <th>Actions</th>
                 </tr>
                 </tfoot>

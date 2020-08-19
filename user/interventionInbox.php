@@ -58,13 +58,14 @@
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
                     <a href="InterventionInbox.php" class="nav-link">
-                      <i class="fas fa-inbox"></i> Inbox
+                      <i class="fas fa-inbox"></i> Toutes
                       <span class="badge bg-primary float-right">12</span>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="InterventionSent.php" class="nav-link">
-                      <i class="far fa-envelope"></i> Envoyée
+                      <i class="far fa-envelope"></i> En cours
+                      <span class="badge bg-primary float-right">2</span>
                     </a>
                   </li>
                 </ul>
